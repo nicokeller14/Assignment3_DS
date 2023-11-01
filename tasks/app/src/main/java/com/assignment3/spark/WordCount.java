@@ -21,9 +21,6 @@ public class WordCount {
     {
         @Override
         public Iterator<String> call(String s) {
-            /*
-             * add your code to filter words
-             */
             String[] subStrings = s.split("\\s+");
             return Arrays.asList(subStrings).iterator();
         }
@@ -37,16 +34,18 @@ public class WordCount {
         JavaRDD<String> textFile = sparkContext.textFile(textFilePath);
         JavaRDD<String> words = textFile.flatMap(new Filter());
 
-        // Mapping words to key-value pairs
+        // here we map the words to key-value pairs
         JavaPairRDD<String, Integer> wordCounts = words.mapToPair(
                 new PairFunction<String, String, Integer>() {
+                    // define the pupel with a word and 1
                     public Tuple2<String, Integer> call(String s) {
                         return new Tuple2<String, Integer>(s, 1);
                     }
                 }
         );
 
-        // Reducing counts for each word
+        // here we reduce the counts for each word
+        // we use the reduceByKey method
         JavaPairRDD<String, Integer> reducedCounts = wordCounts.reduceByKey(
                 new Function2<Integer, Integer, Integer>() {
                     public Integer call(Integer a, Integer b) {
@@ -55,12 +54,14 @@ public class WordCount {
                 }
         );
 
-        // Saving the output
+        // save the output into a file
         reducedCounts
+                // we use .coalesce(1) because this way yhe output get saved onto only one file, otherwise
+                // they arent in just one file but in many others
                 .coalesce(1)
                 .saveAsTextFile("output");
 
-        // Optional: Printing word counts on the Spark Master terminal
+        // to make it faster to correct we also print the output on to the terminal
         List<Tuple2<String, Integer>> output = reducedCounts.collect();
         for (Tuple2<?,?> tuple : output) {
             System.out.println("(" + tuple._1() + "," + tuple._2() + ")");
