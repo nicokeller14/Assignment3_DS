@@ -31,20 +31,41 @@ public class WordCount {
     }
 
     public static void main(String[] args) {
-        String textFilePath = "input/pigs.txt"; // update to HDFS url for task2
-        SparkConf conf = new SparkConf().setAppName("WordCountWithSpark").setMaster("local[*]"); // task2: update the setMaster with your cluster master URL for executing this code on the cluster
+        String textFilePath = "input/pigs.txt";
+        SparkConf conf = new SparkConf().setAppName("WordCountWithSpark").setMaster("local[*]");
         JavaSparkContext sparkContext =  new JavaSparkContext(conf);
         JavaRDD<String> textFile = sparkContext.textFile(textFilePath);
         JavaRDD<String> words = textFile.flatMap(new Filter());
 
-        /*
-         * add your code for key value mapping
-         *
-         * add your code to perform reduce on the given key value pairs
-         *
-         * print the word count and save the output in the format, e.g.,(in:15) to an 'output' folder (on HDFS for task 2)
-         * try to consolidate your output into single text file if you want to check your output against the given sample output
-         */
+        // Mapping words to key-value pairs
+        JavaPairRDD<String, Integer> wordCounts = words.mapToPair(
+                new PairFunction<String, String, Integer>() {
+                    public Tuple2<String, Integer> call(String s) {
+                        return new Tuple2<String, Integer>(s, 1);
+                    }
+                }
+        );
+
+        // Reducing counts for each word
+        JavaPairRDD<String, Integer> reducedCounts = wordCounts.reduceByKey(
+                new Function2<Integer, Integer, Integer>() {
+                    public Integer call(Integer a, Integer b) {
+                        return a + b;
+                    }
+                }
+        );
+
+        // Saving the output
+        reducedCounts
+                .coalesce(1)
+                .saveAsTextFile("output");
+
+        // Optional: Printing word counts on the Spark Master terminal
+        List<Tuple2<String, Integer>> output = reducedCounts.collect();
+        for (Tuple2<?,?> tuple : output) {
+            System.out.println("(" + tuple._1() + "," + tuple._2() + ")");
+        }
+
         sparkContext.stop();
         sparkContext.close();
     }
