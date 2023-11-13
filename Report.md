@@ -11,7 +11,11 @@ Assignment 3
 
 # Task 2
 
-Performance difference is ...
+> When comparing the performance difference of the word count algorithm in local and cluster modes, local mode is suitable for smaller amounts of, 
+> data, because it is limited to the resources of a single machine. In contrast, cluster mode can handle large datasets, leveraging the combined 
+> resources of multiple nodes for better scalability and tasks can run in parallel. While local mode is simpler and more efficient for quick 
+> iterations, cluster mode offers better performance for larger computations, with better fault tolerance and data handling capacity, however the 
+> system is more complex. The choice between the two depends on the amount of data and computing power of the devices being used.
 
 # Task 3
 
