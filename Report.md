@@ -2,6 +2,8 @@ Assignment 3
 ------------
 
 # Team Members
+>Nico Keller and Teo Field-Marsham
+
 
 # GitHub link to your repository (if submitting through GitHub)
 
@@ -43,7 +45,7 @@ Performance difference is ...
 > --> Furthermore, RDDs have an immutable nature, meaning that one they are created, they can't be changed. So we can ensure consistency and deterministic results.
 Source: https://www.sciencedirect.com/topics/computer-science/resilient-distributed-dataset#:~:text=An%20RDD%20is%20an%20immutable%20distributed%20collection%20of%20datasets%20partitioned,stored%20in%20external%20storage%20systems.
 https://www.databricks.com/glossary/what-is-rdd
-> 
+
 4. Imagine that you have a large dataset that needs to be processed in parallel. 
    How would you partition the dataset efficiently and keep control over the number of outputs created at the end of the execution?
 > Ans: In order to efficiently partition datasets there are a couple of things to have in mind.  Firstly, it is important
@@ -55,6 +57,7 @@ https://www.databricks.com/glossary/what-is-rdd
 > coalesce, the number of partitions can be specifically set to control the output while repartitioning or coalescing.
 Source: https://towardsdatascience.com/how-to-efficiently-re-partition-spark-dataframes-c036e8261418
 > https://www.projectpro.io/article/how-data-partitioning-in-spark-helps-achieve-more-parallelism/297
+
 5. If a task is stuck on the Spark cluster due to a network issue that the cluster had during execution, 
   which methods can be used to retry or restart the task execution on a node?
 > Ans: So if  a task is stuck on the Spark cluster, Spark has fault tolerance methods that can automatically retry taasks if they fail
