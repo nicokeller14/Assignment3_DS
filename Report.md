@@ -15,7 +15,7 @@ https://github.com/nicokeller14/Assignment3_DS
 > get the worker of the Raspberry Pi to work, and so we could only run it on our localhost. The SSH connections worked however
 > for some unknown reason we could not run the program on anything other than the localhost. The functions still worked but we
 > could not leverage being able to run on multiple machines/workers due to these issues and were only able to run Task 2 on
-> our localhost. 
+> our localhost. In the end the localhost stopped working too and so we only have screenshots of the hadoop and the output file.
 
    Answer to the question:
 > When comparing the performance difference of the word count algorithm in local and cluster modes, local mode is suitable for smaller amounts of, 
