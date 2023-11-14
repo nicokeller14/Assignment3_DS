@@ -7,7 +7,7 @@ Assignment 3
 
 # GitHub link to your repository (if submitting through GitHub)
 
-...
+https://github.com/nicokeller14/Assignment3_DS
 
 # Task 2
 
