@@ -28,8 +28,8 @@ public class WordCount {
     }
 
     public static void main(String[] args) {
-        String textFilePath = "input/pigs.txt";
-        SparkConf conf = new SparkConf().setAppName("WordCountWithSpark").setMaster("local[*]");
+        String textFilePath = "input/pigs.txt"; //CHANGE THIS PATH TO HDFS URL
+        SparkConf conf = new SparkConf().setAppName("WordCountWithSpark").setMaster("spark://172.20.10.3:7077"); //update the setMaster with your cluster master URL for executing this code on the cluster
         JavaSparkContext sparkContext =  new JavaSparkContext(conf);
         JavaRDD<String> textFile = sparkContext.textFile(textFilePath);
         JavaRDD<String> words = textFile.flatMap(new Filter());
@@ -59,7 +59,7 @@ public class WordCount {
                 // we use .coalesce(1) because this way yhe output get saved onto only one file, otherwise
                 // they arent in just one file but in many others
                 .coalesce(1)
-                .saveAsTextFile("output");
+                .saveAsTextFile("output"); //print the word count and save the output in the format, e.g.,(in:15) to an 'output' folder (on HDFS for task 2)
 
         // to make it faster to correct we also print the output on to the terminal
         List<Tuple2<String, Integer>> output = reducedCounts.collect();
