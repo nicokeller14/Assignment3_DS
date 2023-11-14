@@ -2,8 +2,8 @@ Assignment 3
 ------------
 
 # Team Members
->Nico Keller and Teo Field-Marsham
 
+>Nico Keller and Teo Field-Marsham
 
 # GitHub link to your repository (if submitting through GitHub)
 
@@ -11,6 +11,13 @@ https://github.com/nicokeller14/Assignment3_DS
 
 # Task 2
 
+> We ran into large problems here when it came to running the word counter on both our laptop and Raspberry Pi. We could not
+> get the worker of the Raspberry Pi to work, and so we could only run it on our localhost. The SSH connections worked however
+> for some unknown reason we could not run the program on anything other than the localhost. The functions still worked but we
+> could not leverage being able to run on multiple machines/workers due to these issues and were only able to run Task 2 on
+> our localhost. 
+
+   Answer to the question:
 > When comparing the performance difference of the word count algorithm in local and cluster modes, local mode is suitable for smaller amounts of, 
 > data, because it is limited to the resources of a single machine. In contrast, cluster mode can handle large datasets, leveraging the combined 
 > resources of multiple nodes for better scalability and tasks can run in parallel. While local mode is simpler and more efficient for quick 
@@ -20,7 +27,7 @@ https://github.com/nicokeller14/Assignment3_DS
 # Task 3
 
 1. How does Spark optimize its file access compared to the file access in MapReduce?
-> Ans: In the first assignment we saw that in MapReduce, we read and writes the data to the disk after every step, so this takes a lot of time.
+> Ans: In the first assignment we saw that in MapReduce, we read and write the data to the disk after every step, so this takes a lot of time.
 > On the other hand, Spark tries to optimize the file access through in-memory processing. This means, that Spark caches the intermediate necessary 
 > data in memory. This way, we don't have to access the disk that many time to read and write.
 > This approach used by Spark speeds up the data processing by a lot because it is way faster to access data from RAM
@@ -42,7 +49,7 @@ https://github.com/nicokeller14/Assignment3_DS
 3. Explain what Resilient Distributed Dataset (RDD) is and the benefits it brings to the classic MapReduce model.
 > Ans: An RDD is a fundamental data structure in Spark, is is an immutable distributed collection of elements of our data,
 > partitioned across nodes that can be processed in parallel. It has several benefits for the classic MapReduce model such as:
-> --> an RDD allows the data to be cached in memory, tuhs resulting in faster access and processing. Compared to disk-based storage, this
+> --> an RDD allows the data to be cached in memory, thus resulting in faster access and processing. Compared to disk-based storage, this
 > is a huge benefit.
 > --> RDD's are fault tolerant. So if for example a node fails, then data can be recomputed from the data that was already replicated by other nodes.
 > --> Another benefit is its flexibility. RDD's can be created from many differente data sources. Including local file systems, databases and HDFS.
